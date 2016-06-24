@@ -4,14 +4,20 @@ package com.lab4u.hannahchen.teacherlogin;
  * Created by hannahchen on 6/22/16.
  */
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
 public class RegistrationTest {
 
-    RegistrationPresenter rp = new RegistrationPresenter(new DataBase(), new RegistrationActivity());
+    RegistrationPresenter rp = null;
 
+
+    @Before
+    public void setup(){
+        rp = new RegistrationPresenter(DataBase.dataBase, new RegistrationActivity());
+    }
 
     @Test
     public void testValidLetters(){

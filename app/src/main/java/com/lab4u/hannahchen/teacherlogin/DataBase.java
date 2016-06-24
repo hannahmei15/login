@@ -9,6 +9,8 @@ import java.util.Iterator;
  * Class to act as a data base to store emails and passwords using a hashtable
  */
 public class DataBase {
+    public static Hashtable dataBase = new Hashtable();
+
     private Hashtable data;
 
 

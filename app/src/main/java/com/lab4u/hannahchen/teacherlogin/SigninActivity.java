@@ -21,8 +21,6 @@ public class SigninActivity extends AppCompatActivity implements SigninContract.
     private EditText password;
     private Button registerButton;
     private SigninPresenter presenter;
-    public static Hashtable dataBase = new Hashtable();
-
 
 
     @Override
@@ -37,20 +35,14 @@ public class SigninActivity extends AppCompatActivity implements SigninContract.
         password = (EditText) findViewById(R.id.password);
 
         //create the presenter
-        presenter = new SigninPresenter(dataBase, this);
+        presenter = new SigninPresenter(DataBase.dataBase, this);
 
 
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (presenter.userValid()){
-                    Intent i = new Intent(SigninActivity.this, BlankActivity.class);
-                    startActivity(i);
-                }
-                else{
-                    showNoAccount();
-                    password.setText("");
-                }
+                presenter.initLoginLab4UApplication();
+
             }
         });
 
@@ -66,6 +58,27 @@ public class SigninActivity extends AppCompatActivity implements SigninContract.
     @Override
     public void showNoAccount(){
         Toast.makeText(getApplicationContext(), "Username or Password is incorrect", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public String getEmail() {
+        return String.valueOf(((EditText)findViewById(R.id.email)).getText());
+    }
+
+    @Override
+    public String getPasword() {
+        return String.valueOf(((EditText)findViewById(R.id.password)).getText());
+    }
+
+    @Override
+    public void cleanPassword() {
+        password.setText("");
+    }
+
+    @Override
+    public void onCompleteInitLoginLab4UApplication() {
+        Intent i = new Intent(SigninActivity.this, BlankActivity.class);
+        startActivity(i);
     }
 
 

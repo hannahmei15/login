@@ -36,7 +36,7 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
         EditText email = (EditText)view.findViewById(R.id.email);
         EditText password = (EditText) view.findViewById(R.id.password);
         db.put(email.getText().toString(), password.getText().toString());
-        SigninActivity.dataBase.put(email.getText().toString(), password.getText().toString());
+        DataBase.dataBase.put(email.getText().toString(), password.getText().toString());
     }
 
 //    public void getPassword(){

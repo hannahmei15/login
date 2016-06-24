@@ -27,7 +27,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         //create the presenter
-        presenter = new RegistrationPresenter(SigninActivity.dataBase, this);
+        presenter = new RegistrationPresenter(DataBase.dataBase, this);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,8 +45,6 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
                             startActivity(intent);
                         }
                     }, 3800);
-
-
                 }
                 else{
                     showInvalid();
