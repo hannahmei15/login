@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TeacherLogin</string>
+    <string name="register_button"><u>Need an Account? Register Here</u></string>
+</resources>

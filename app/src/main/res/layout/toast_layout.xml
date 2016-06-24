@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/lightRED"
+
+    android:padding="8dp"
+    android:id="@+id/registration_toast"
+    >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:text="Registration Successful!"
+        android:textColor="@color/BLACK"
+        android:id="@+id/text"/>
+
+
+
+</LinearLayout>
