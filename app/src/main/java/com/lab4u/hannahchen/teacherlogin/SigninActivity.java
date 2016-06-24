@@ -35,7 +35,7 @@ public class SigninActivity extends AppCompatActivity implements SigninContract.
         password = (EditText) findViewById(R.id.password);
 
         //create the presenter
-        presenter = new SigninPresenter(DataBase.dataBase, this);
+        presenter = new SigninPresenter(this);
 
 
         logInButton.setOnClickListener(new View.OnClickListener() {

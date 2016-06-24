@@ -27,31 +27,13 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         email = (EditText) findViewById(R.id.email);
         password = (EditText) findViewById(R.id.password);
         //create the presenter
-        presenter = new RegistrationPresenter(DataBase.dataBase, this);
+        presenter = new RegistrationPresenter(this);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (presenter.isValid(email.getText().toString())){
-                    presenter.addUser();
-
-                    showRegistration();
-                    //change to a new blank window
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(RegistrationActivity.this, SigninActivity.class);
-                            startActivity(intent);
-                        }
-                    }, 3800);
+                presenter.initRegisterLab4UApplication();
                 }
-                else{
-                    showInvalid();
-                    email.setText("");
-                    password.setText("");
-                }
-            }
         });
     }
 
@@ -74,6 +56,36 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         toast.setDuration(Toast.LENGTH_LONG);
         toast.setView(layout);
         toast.show();
+    }
+
+    @Override
+    public String getEmail(){
+        return String.valueOf(((EditText)findViewById(R.id.email)).getText());
+    }
+
+    @Override
+    public void onCompleteRegisterLoginLab4UApplication() {
+        showRegistration();
+        //change to a new blank window
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(RegistrationActivity.this, SigninActivity.class);
+                startActivity(intent);
+            }
+        }, 3800);
+    }
+
+
+    @Override
+    public String getPassword(){
+        return String.valueOf(((EditText)findViewById(R.id.password)).getText());
+    }
+
+    @Override
+    public void clearText(){
+        email.setText("");
+        password.setText("");
     }
 
 

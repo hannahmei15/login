@@ -13,8 +13,8 @@ public class SigninPresenter implements SigninContract.Presenter {
     private SigninContract.View view;
     private Hashtable db;
 
-    public SigninPresenter(Hashtable db, SigninContract.View view){
-        this.db = db;
+    public SigninPresenter(SigninContract.View view){
+        db = DataBase.dataBase;
         this.view = view;
     }
 
@@ -47,8 +47,5 @@ public class SigninPresenter implements SigninContract.Presenter {
         }
     }
 
-    @Override
-    public void initLoginLab4UApplication(String email, String password) {
 
-    }
 }

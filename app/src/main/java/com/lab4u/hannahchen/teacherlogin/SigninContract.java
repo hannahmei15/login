@@ -7,7 +7,7 @@ public interface SigninContract {
     interface Presenter{
         boolean userValid();
         void initLoginLab4UApplication();
-        void initLoginLab4UApplication(String email,String password);
+//        void initLoginLab4UApplication(String email,String password);
     }
 
     interface View{

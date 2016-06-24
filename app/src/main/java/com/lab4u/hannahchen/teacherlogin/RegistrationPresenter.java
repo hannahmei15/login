@@ -16,10 +16,10 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
 
     private Hashtable db;
 
-    private RegistrationActivity view;
+    private RegistrationContract.View view;
 
-    public RegistrationPresenter(Hashtable db, RegistrationActivity view){
-        this.db = db;
+    public RegistrationPresenter(RegistrationContract.View view){
+        db = DataBase.dataBase;
         this.view = view;
     }
 
@@ -33,10 +33,9 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
 
     @Override
     public void addUser(){
-        EditText email = (EditText)view.findViewById(R.id.email);
-        EditText password = (EditText) view.findViewById(R.id.password);
-        db.put(email.getText().toString(), password.getText().toString());
-        DataBase.dataBase.put(email.getText().toString(), password.getText().toString());
+        String email = view.getEmail();
+        String password = view.getPassword();
+        db.put(email, password);
     }
 
 //    public void getPassword(){
@@ -52,6 +51,18 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
 //    public DataBase getDB(){
 //        return dataBase;
 //    }
+
+    @Override
+    public void initRegisterLab4UApplication(){
+        if (isValid(view.getEmail())){
+            view.onCompleteRegisterLoginLab4UApplication();
+            addUser();
+        }
+        else{
+            view.showInvalid();
+            view.clearText();
+        }
+    }
 
 
 
