@@ -15,6 +15,11 @@ public interface RegistrationContract {
         void showRegistration(); //show a succesful registration
         String getPassword();
         String getEmail();
+        String getFirstName();
+        String getLastName();
+        String getGender();
+        String getType();
+        String getLanguage();
         void onCompleteRegisterLoginLab4UApplication();
         void clearText();
     }
