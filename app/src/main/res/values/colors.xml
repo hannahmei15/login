@@ -7,5 +7,6 @@
     <color name="transparentRED">#59FF0000</color>
     <color name="BLACK">#000000</color>
     <color name="lightRED">#ff6666</color>
+    <color name="WHITE">#FFF</color>
 
 </resources>

@@ -8,16 +8,27 @@ public class ExampleResponse {
     private String status;
     private String code;
     private String message;
-    private String CdnUrl;
 
-    public ExampleResponse(String status, String code, String message, String CdnUrl){
+    public String getUserId() {
+        return userId;
+    }
+
+    private String userId;
+
+    public ExampleResponse(String status, String code, String message, String userId){
         this.status = status;
         this.code = code;
         this.message = message;
-        this.CdnUrl = CdnUrl;
+        this.userId = userId;
     }
 
     public String getStatus(){
         return status;
+    }
+
+    @Override
+    public String toString(){
+        return "status: " + status + " code: " + code + " message " + message
+                + " userID: " + userId;
     }
 }

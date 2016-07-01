@@ -1,5 +1,7 @@
 package com.lab4u.hannahchen.teacherlogin;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.EditText;
 
@@ -21,15 +23,14 @@ import retrofit.RetrofitError;
  */
 public class RegistrationPresenter implements RegistrationContract.Presenter {
 
-    private Hashtable db;
-
     private RegistrationContract.View view;
     private WebService mWebService;
+    SharedPreferences sharedPref;
 
     public RegistrationPresenter(RegistrationContract.View view, WebService webService){
-        db = DataBase.dataBase;
         this.view = view;
         this.mWebService = webService;
+        sharedPref = view.getPreference();
     }
 
     @Override
@@ -43,7 +44,6 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
     @Override
     public void initRegisterLab4UApplication(){
         if (isValid(view.getEmail())){
-            view.onCompleteRegisterLoginLab4UApplication();
             addUser();
         }
         else{
@@ -67,16 +67,23 @@ public class RegistrationPresenter implements RegistrationContract.Presenter {
 
         User newUser = new User(email, first_name, gender, "", language, last_name, "LAB4U", password, "", type);
         Log.d("RegistrationPresenter", newUser.toString());
-        mWebService.createUser(newUser, new Callback<String>() {
-            @Override
-            public void success(String s, retrofit.client.Response response) {
+        mWebService.createUser(newUser, new Callback<Token>() {
+                    @Override
+                    public void success(Token responseToken, retrofit.client.Response response) {
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        String accessToken = responseToken.getAccessToken();
+                        editor.putString("AccessToken", "Bearer " + accessToken);
+                        editor.commit();
+                        //show the registration complete message
+                        view.onCompleteRegisterLoginLab4UApplication();
+                    }
 
-            }
-            @Override
-            public void failure(RetrofitError error) {
-            }
-        });
-//        db.put(email, password);
+                    @Override
+                    public void failure(RetrofitError error) {
+                        view.showInvalid();
+                        view.clearText();
+                    }
+                });
     }
 
 }

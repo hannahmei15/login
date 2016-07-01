@@ -1,13 +1,15 @@
 package com.lab4u.hannahchen.teacherlogin;
 
+import android.content.SharedPreferences;
+
+import java.util.ResourceBundle;
+
 /**
  * Created by hannahchen on 6/23/16.
  */
 public interface SigninContract {
     interface Presenter{
-        boolean userValid();
         void initLoginLab4UApplication();
-//        void initLoginLab4UApplication(String email,String password);
     }
 
     interface View{
@@ -16,6 +18,9 @@ public interface SigninContract {
         String getPasword();
         void cleanPassword();
         void onCompleteInitLoginLab4UApplication();
+        SharedPreferences getSharedPref();
+        boolean hasAuthentication();
+        void goToHomeScreen();
     }
 
 }

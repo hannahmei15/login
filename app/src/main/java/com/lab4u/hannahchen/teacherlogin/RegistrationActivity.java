@@ -1,6 +1,12 @@
 package com.lab4u.hannahchen.teacherlogin;
 
+import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,11 +24,12 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
-
-public class RegistrationActivity extends AppCompatActivity implements RegistrationContract.View{
+@TargetApi(11)
+public class RegistrationActivity extends Activity implements RegistrationContract.View{
     private Button submitButton;
     private EditText first_name;
     private EditText last_name;
@@ -32,6 +39,7 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     private RadioGroup typeGrp;
     private RegistrationPresenter presenter;
     private WebService mWebService;
+    private SharedPreferences sharedPref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,21 +53,9 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         typeGrp = (RadioGroup) findViewById(R.id.typeGrp);
 
         mWebService = ServiceGenerator.createService(WebService.class);
-
+        sharedPref= getPreferences(Context.MODE_PRIVATE);
         //create the presenter
         presenter = new RegistrationPresenter(this, mWebService);
-
-//        mWebService.getInfo(new Callback<ExampleResponse>() {
-//                                @Override
-//                                public void success(ExampleResponse r, Response response) {
-//                                    Log.d("RegistrationActivity-h", r.getStatus());
-//                                }
-//
-//                                @Override
-//                                public void failure(RetrofitError error) {
-//
-//                                }
-//                            });
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,13 +63,12 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
                 presenter.initRegisterLab4UApplication();
                 }
         });
-
     }
 
     //methods for the view
     @Override
     public void showInvalid(){
-        Toast.makeText(getApplicationContext(), "Email Address is Invalid. Try Again.", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Email address is invalid or already in use.", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -117,10 +112,13 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(RegistrationActivity.this, SigninActivity.class);
-                startActivity(intent);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                HomeFragment homeFragment = new HomeFragment();
+                fragmentTransaction.add(android.R.id.content, homeFragment);
+                fragmentTransaction.commit();
             }
-        }, 3800);
+        }, 3000);
     }
 
 
@@ -148,11 +146,20 @@ public class RegistrationActivity extends AppCompatActivity implements Registrat
     public void clearText(){
         email.setText("");
         password.setText("");
-
     }
 
     @Override
     public String getLanguage(){
         return Locale.getDefault().toString();
     }
+
+    @Override
+    public SharedPreferences getPreference(){
+        return sharedPref;
+    }
+
+//    @Override
+//    public goToHome(){
+//
+//    }
 }

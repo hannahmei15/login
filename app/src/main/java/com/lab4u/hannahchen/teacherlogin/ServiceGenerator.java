@@ -14,7 +14,7 @@ import retrofit.client.OkClient;
  */
 public class ServiceGenerator {
 
-    public static final String API_BASE_URL = "https://v1-qa-api.lab4u.co";
+    public static final String API_BASE_URL = "http://10.0.1.18:9001";
 
     private static RestAdapter.Builder builder = new RestAdapter.Builder()
             .setEndpoint(API_BASE_URL)
@@ -22,7 +22,6 @@ public class ServiceGenerator {
             .setClient(new OkClient(new OkHttpClient()));
 
     public static <S> S createService(Class<S> serviceClass) {
-
             builder.setRequestInterceptor(new RequestInterceptor() {
                 @Override
                 public void intercept(RequestFacade request) {
@@ -30,10 +29,8 @@ public class ServiceGenerator {
                 }
             });
 
-
         RestAdapter adapter = builder.build();
         return adapter.create(serviceClass);
-
     }
 
     public static <S> S createService(Class<S> serviceClass, final String authToken) {

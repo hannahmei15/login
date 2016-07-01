@@ -1,5 +1,8 @@
 package com.lab4u.hannahchen.teacherlogin;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+
 /**
  * Created by hannahchen on 6/22/16.
  */
@@ -22,6 +25,7 @@ public interface RegistrationContract {
         String getLanguage();
         void onCompleteRegisterLoginLab4UApplication();
         void clearText();
+        SharedPreferences getPreference();
     }
 
 

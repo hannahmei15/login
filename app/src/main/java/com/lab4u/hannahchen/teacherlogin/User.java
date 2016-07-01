@@ -38,6 +38,7 @@ public class User {
     @SerializedName("type")
     private String type;
 
+
     public User(String email, String first_name, String gender, String image, String language, String last_name,
                 String login_type, String password, String third_party_id, String type){
         this.email = email;
@@ -50,6 +51,14 @@ public class User {
         this.password = password;
         this.third_party_id = third_party_id;
         this.type = type;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override

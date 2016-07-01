@@ -21,7 +21,7 @@
             android:textAlignment="center"
             android:id="@+id/signUpText"
             android:ems="10"
-            android:paddingTop="12dp"
+            android:paddingTop="15dp"
             android:layout_below="@+id/logo"
 
             />
@@ -42,7 +42,7 @@
         android:textSize="15sp"
         android:hint="First Name"
         android:layout_below="@+id/logo"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="75dp"
         android:gravity="center"
 
         />
@@ -68,7 +68,7 @@
         android:textSize="15sp"
         android:hint="Email"
         android:layout_below="@+id/last_name"
-        android:paddingTop="15dp"
+        android:paddingTop="25dp"
         android:gravity="center"
         />
 
@@ -89,7 +89,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingTop="10dp"
+    android:paddingTop="20dp"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
     android:layout_below="@+id/password"
